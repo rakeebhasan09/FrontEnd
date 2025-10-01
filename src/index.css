@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.card {
+		--start: 0;
+		@apply relative transition-colors duration-300;
+	}
+
+	.card::before {
+		position: absolute;
+		content: "";
+		width: 100%;
+		height: 100%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 14px;
+		border: 3px solid transparent;
+		background: #ff014f;
+		mask: linear-gradient(#0000, #0000),
+			conic-gradient(
+				from calc((var(--start) - (20 * 1.1)) * 1deg),
+				#ffffff1f 0deg,
+				white,
+				#ffffff00 100deg
+			);
+		mask-composite: intersect;
+		mask-clip: padding-box, border-box;
+		opacity: 0;
+		transition: 0.5s ease;
+	}
+
+	.card:hover {
+		opacity: 1;
+	}
+
+	.card:hover::before {
+		opacity: 0.6;
+	}
+}
+
+@layer utilities {
+	@keyframes mymove {
+		0% {
+			left: 0;
+		}
+		50% {
+			left: calc(100% - 15px);
+		}
+		100% {
+			left: 0;
+		}
+	}
+	.animate-mymove {
+		animation: mymove 6s linear infinite;
+	}
+}
+
+body {
+	background: #060606;
+	font-weight: 400;
+	font-size: 16px;
+	color: #9f9f9f;
+}
+
+.container {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#about-page-skills .skills-area {
+	padding-top: 0 !important;
+}
+
+@media (min-width: 576px) {
+	.container {
+		max-width: 540px;
+	}
+}
+@media (min-width: 768px) {
+	.container {
+		max-width: 720px;
+	}
+}
+@media (min-width: 992px) {
+	.container {
+		max-width: 960px;
+	}
+}
+@media (min-width: 1200px) {
+	.container {
+		max-width: 1140px;
+	}
+}
+@media (min-width: 1400px) {
+	.container {
+		max-width: 1320px;
+	}
+}
+
+.drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
+	background: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(5px);
+}
+
+.custom-stroke {
+	position: relative;
+	-webkit-text-stroke: 1px #fff;
+	color: transparent;
+	animation: upsAndDown 2s infinite linear;
+}
+.keyFramAnimation {
+	position: relative;
+	animation: upsAndDown 2s infinite linear;
+}
+
+/* global.css বা App.css এ দাও */
+.yarl__backdrop,
+.yarl__container {
+	background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.yarl__slide_captions_container.yarl__slide_title_container {
+	position: absolute;
+	left: 50%;
+	bottom: 40px;
+	transform: translateX(-50%);
+}
+
+.yarl__slide_title {
+	text-transform: capitalize;
+	color: #ff014f;
+	font-weight: 600;
+	font-size: 23px;
+}
+
+.yarl__slide {
+	padding: 0 !important;
+}
+
+.aside-menu-items ul li .active {
+	color: #ffffff;
+	background: #ff014f;
+}
+
+@keyframes upsAndDown {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.desktop-menu li .active {
+	color: #ff014f;
+	background: #270d15;
+}
+
+@media screen and (max-width: 575px) {
+	.my-image.relative img {
+		width: 240px;
+	}
+}

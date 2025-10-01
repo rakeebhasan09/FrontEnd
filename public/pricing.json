@@ -1,0 +1,40 @@
+[
+	{
+		"id": "6fa459ea-ee8a-3ca4-894e-db77e160355e",
+		"title": "Basic",
+		"price": 230,
+		"duration": "Per Month",
+		"features": [
+			"5 Social Media Account",
+			"Marketing Platform",
+			"24/7 Customer Support",
+			"Lifetime Support"
+		]
+	},
+	{
+		"id": "c9bf9e57-1685-4c89-bafb-ff5af830be8a",
+		"title": "Standard",
+		"price": 450,
+		"duration": "Per Month",
+		"features": [
+			"10 Social Media Accounts",
+			"Free Platform Access",
+			"Advanced Marketing Platform",
+			"24/7 Priority Support",
+			"Lifetime Updates"
+		]
+	},
+	{
+		"id": "2c1f3f6e-91a0-4c41-9f56-1e1f40f98a25",
+		"title": "Premium",
+		"price": 750,
+		"duration": "Per Month",
+		"features": [
+			"Unlimited Social Media Accounts",
+			"Free Platform Access",
+			"AI-Powered Marketing Tools",
+			"Dedicated Account Manager",
+			"Lifetime Premium Support"
+		]
+	}
+]

@@ -1,0 +1,16 @@
+[
+	{
+		"id": "f7c9f3c1-1c47-41f3-9f6f-3b31c8ff50d7",
+		"company": "Soft Tech",
+		"duration": "2 Years",
+		"role": "UI/UX Designer",
+		"description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum desi dolore eu fugiat nulla pariatur Duis aute irure."
+	},
+	{
+		"id": "a94f2764-4373-4b11-9a2e-f9c0e2e6a8a5",
+		"company": "ModernTech",
+		"duration": "3 Years",
+		"role": "App Developer",
+		"description": "In this portfolio, you’ll find a curated selection of projects that highlight my skills in [Main Areas, e.g., responsive web design."
+	}
+]

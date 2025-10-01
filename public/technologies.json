@@ -1,0 +1,67 @@
+[
+	{
+		"id": "3d5f1d2a-7c2d-4a0a-8f2d-9cbf5ef1c4e1",
+		"label": "Figma Icon",
+		"logo": "https://i.ibb.co.com/67PRcsjW/figma-icon.png"
+	},
+	{
+		"id": "7e2afc09-6f0a-4f42-a1f4-24c2f80a7d8d",
+		"label": "Photoshop Icon",
+		"logo": "https://i.ibb.co.com/fzxCfPCT/photoshop-white-icon.png"
+	},
+	{
+		"id": "51f7cc77-92ce-4dc7-9b7e-d41f2c5f7c54",
+		"label": "XD Icon",
+		"logo": "https://i.ibb.co.com/j9CMJpT8/xd-icon.png"
+	},
+	{
+		"id": "0a5c8df1-76f3-4e39-a3e7-9a4bb6a6f924",
+		"label": "HTML5 Icon",
+		"logo": "https://i.ibb.co.com/pvmQHCQD/d1f91caa-e49d-4219-8adf-862119eb5c5e.png"
+	},
+	{
+		"id": "3fa6f3cb-b176-44b2-9462-4f9b2ab22113",
+		"label": "CSS3 Icon",
+		"logo": "https://i.ibb.co.com/S4PTQndY/css3-icon.png"
+	},
+	{
+		"id": "fc6c5c9f-3a08-4c2d-b5df-2c77543b98e4",
+		"label": "Bootstrap Icon",
+		"logo": "https://i.ibb.co.com/jPDKfQPr/bootstrap-logo-shadow.png"
+	},
+	{
+		"id": "c02bbeb8-d3b6-46c6-bff8-145c4ff6dd93",
+		"label": "Tailwind CSS Icon",
+		"logo": "https://i.ibb.co.com/vCYFHvLp/Tailwind-CSS-Logo-svg.png"
+	},
+	{
+		"id": "a9c944f5-cbe0-4d7e-90f0-944a5d2a69b3",
+		"label": "JavaScript Icon",
+		"logo": "https://i.ibb.co.com/n806rHy4/js-icon.png"
+	},
+	{
+		"id": "26c823c6-dcc5-4596-a2a0-b62a61cbd1f8",
+		"label": "jQuery Icon",
+		"logo": "https://i.ibb.co.com/gLSnQhQS/jquery-icon.png"
+	},
+	{
+		"id": "e7a05f4e-0846-4055-8aa2-bc70d54882c0",
+		"label": "React Icon",
+		"logo": "https://i.ibb.co.com/GQ4F4yGP/react-icon.png"
+	},
+	{
+		"id": "11dbbb21-36fb-4d64-9d5b-7d3ef6513bc9",
+		"label": "Firebase Icon",
+		"logo": "https://i.ibb.co.com/PZYYYL0N/firebase.png"
+	},
+	{
+		"id": "65de2f1e-9b44-42d3-9cbf-4a688ab5e53d",
+		"label": "Node js Icon",
+		"logo": "https://i.ibb.co.com/JjSjq6vB/node-js-icon.png"
+	},
+	{
+		"id": "efc845c6-274f-49d7-8f56-1d11b6bbd143",
+		"label": "MongoDB Icon",
+		"logo": "https://i.ibb.co.com/5hwXjkkJ/mongodb-icon.png"
+	}
+]
