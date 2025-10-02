@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const AdminList = () => {
 	const [admins, setAdmins] = useState([]);
-	const navigate = useNavigate();
 	useEffect(() => {
 		fetch("http://localhost:5000/api/registerd-admins")
 			.then((res) => res.json())
@@ -15,7 +14,7 @@ const AdminList = () => {
 	}, []);
 
 	// Admin Delete Handler
-	const deleteAdminHandler = () => {
+	const deleteAdminHandler = (adminID) => {
 		Swal.fire({
 			title: "Are you sure?",
 			text: "You won't be able to revert this!",
@@ -24,15 +23,35 @@ const AdminList = () => {
 			confirmButtonColor: "#3085d6",
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Delete",
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
-				Swal.fire({
-					title: "Deleted!",
-					text: "Admin has been deleted.",
-					icon: "success",
-				}).then(() => {
-					navigate("/dashboard/admin-list");
-				});
+				try {
+					const res = await fetch(
+						`http://localhost:5000/api/delete-admin/${adminID}`,
+						{
+							method: "DELETE",
+						}
+					);
+
+					if (res.ok) {
+						Swal.fire({
+							title: "Deleted!",
+							text: "Admin has been deleted.",
+							icon: "success",
+						}).then(() => {
+							window.location.href = "/dashboard/admin-list";
+						});
+					} else {
+						Swal.fire(
+							"Error!",
+							"Failed to delete contact.",
+							"error"
+						);
+					}
+				} catch (err) {
+					console.error(err);
+					Swal.fire("Error!", "Something went wrong.", "error");
+				}
 			}
 		});
 	};
@@ -95,7 +114,9 @@ const AdminList = () => {
 											""
 										) : (
 											<button
-												onClick={deleteAdminHandler}
+												onClick={() =>
+													deleteAdminHandler(admin.id)
+												}
 												className="w-10 h-10 rounded bg-red-400 flex items-center justify-center"
 											>
 												<FaTrash className="text-white" />

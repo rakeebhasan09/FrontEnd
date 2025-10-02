@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const AddToolkit = () => {
 	const navigate = useNavigate();
 	// Submit Handler
-	const addNewToolkit = (e) => {
+	const addNewToolkit = async (e) => {
 		e.preventDefault();
 		const name = e.target.toolkitname.value;
 		const toolkiturl = e.target.toolkiturl.value;
@@ -14,12 +14,26 @@ const AddToolkit = () => {
 			toast.warn("All fields area required.");
 			return;
 		}
-		Swal.fire({
-			title: "Toolkit Added.",
-			icon: "success",
-		}).then(() => {
-			e.target.reset(), navigate("/dashboard/toolkit");
-		});
+
+		const toolkitInfo = { name, toolkiturl };
+		try {
+			const res = await fetch("http://localhost:5000/api/add-toolkit", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(toolkitInfo),
+			});
+
+			if (res.ok) {
+				Swal.fire({
+					title: "Toolkit Added.",
+					icon: "success",
+				}).then(() => {
+					e.target.reset(), navigate("/dashboard/toolkit");
+				});
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 	return (
 		<>
