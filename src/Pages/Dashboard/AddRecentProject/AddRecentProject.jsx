@@ -5,23 +5,50 @@ import Swal from "sweetalert2";
 
 const AddRecentProject = () => {
 	const navigate = useNavigate();
-	const addRecentProjectHandler = (event) => {
+	const addRecentProjectHandler = async (event) => {
 		event.preventDefault();
 		const name = event.target.projectName.value;
 		const liveUrl = event.target.liveUrl.value;
+		const thumnailUrl = event.target.thumnailUrl.value;
 		const fullPageUrl = event.target.fullPageUrl.value;
 
-		if (name === "" || liveUrl === "" || fullPageUrl === "") {
+		if (
+			name === "" ||
+			liveUrl === "" ||
+			thumnailUrl === "" ||
+			fullPageUrl === ""
+		) {
 			toast.warn("All Fields Are Required!");
 			return;
 		}
 
-		Swal.fire({
-			title: "Recent Project Added.",
-			icon: "success",
-		}).then(() => {
-			event.target.reset(), navigate("/dashboard/recent-projects");
-		});
+		const recentProject = { name, liveUrl, thumnailUrl, fullPageUrl };
+		console.log(recentProject);
+
+		try {
+			const res = await fetch(
+				"http://localhost:5000/api/add-recent-project",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(recentProject),
+				}
+			);
+			if (res.ok) {
+				Swal.fire({
+					title: "Recent Project Added.",
+					icon: "success",
+				}).then(() => {
+					event.target.reset();
+					navigate("/dashboard/recent-projects");
+				});
+			} else {
+				Swal.fire({
+					title: "Something went wrong.",
+					icon: "failed",
+				});
+			}
+		} catch (error) {}
 	};
 	return (
 		<>
@@ -61,7 +88,18 @@ const AddRecentProject = () => {
 						</div>
 						<div className="mt-5">
 							<label className="block text-black font-medium font-rubik mb-1">
-								Full Page URL
+								Thumnail URL (100vh)
+							</label>
+							<input
+								type="text"
+								name="thumnailUrl"
+								placeholder="Paste Thumnail URL"
+								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
+							/>
+						</div>
+						<div className="mt-5">
+							<label className="block text-black font-medium font-rubik mb-1">
+								Full Page URL (1920 * 2000)
 							</label>
 							<input
 								type="text"

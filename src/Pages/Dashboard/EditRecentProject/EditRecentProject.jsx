@@ -1,27 +1,58 @@
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const EditRecentProject = () => {
 	const navigate = useNavigate();
-	const editRecentProjectHandler = (event) => {
+	const location = useLocation();
+	const { recentProject } = location.state || {};
+	const editRecentProjectHandler = async (event) => {
 		event.preventDefault();
+		const id = recentProject.id;
 		const name = event.target.projectName.value;
 		const liveUrl = event.target.liveUrl.value;
+		const thumbnailUrl = event.target.thumbnailUrl.value;
 		const fullPageUrl = event.target.fullPageUrl.value;
 
-		if (name === "" || liveUrl === "" || fullPageUrl === "") {
+		if (
+			name === "" ||
+			liveUrl === "" ||
+			thumbnailUrl === "" ||
+			fullPageUrl === ""
+		) {
 			toast.warn("All Fields Are Required!");
 			return;
 		}
 
-		Swal.fire({
-			title: "Recent Project Edited.",
-			icon: "success",
-		}).then(() => {
-			event.target.reset(), navigate("/dashboard/recent-projects");
-		});
+		const updateInfo = { id, name, liveUrl, thumbnailUrl, fullPageUrl };
+
+		try {
+			const res = await fetch(
+				`http://localhost:5000/api/update-recent-project`,
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(updateInfo),
+				}
+			);
+			if (res.ok) {
+				Swal.fire({
+					title: "Recent Project Edited.",
+					icon: "success",
+				}).then(() => {
+					event.target.reset();
+					navigate("/dashboard/recent-projects");
+				});
+			} else {
+				Swal.fire({
+					title: "Something Went Wrong.",
+					icon: "failed",
+				});
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 	return (
 		<>
@@ -43,7 +74,7 @@ const EditRecentProject = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"Project Name"}
+								defaultValue={recentProject.name}
 								name="projectName"
 								placeholder="Write Project Name"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -55,9 +86,21 @@ const EditRecentProject = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"Live URL"}
+								defaultValue={recentProject.url}
 								name="liveUrl"
 								placeholder="Paste Live URL"
+								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
+							/>
+						</div>
+						<div className="mt-5">
+							<label className="block text-black font-medium font-rubik mb-1">
+								Thumbnail URL
+							</label>
+							<input
+								type="text"
+								defaultValue={recentProject.thumbnail}
+								name="thumbnailUrl"
+								placeholder="Paste Full Page URL"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
 							/>
 						</div>
@@ -67,7 +110,7 @@ const EditRecentProject = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"Full Page URL"}
+								defaultValue={recentProject.full_image}
 								name="fullPageUrl"
 								placeholder="Paste Full Page URL"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"

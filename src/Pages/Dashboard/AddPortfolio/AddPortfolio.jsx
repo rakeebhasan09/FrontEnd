@@ -115,7 +115,7 @@ const AddPortfolio = () => {
 						</div>
 						<div className="mt-5">
 							<label className="block text-black font-medium font-rubik mb-1">
-								Thumbnail URL
+								Thumbnail URL (100vh)
 							</label>
 							<input
 								type="text"
