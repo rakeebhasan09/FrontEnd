@@ -108,7 +108,7 @@ const router = createBrowserRouter([
 						element: <AddToolkit />,
 					},
 					{
-						path: "add-new-portfolio",
+						path: "add-portfolio",
 						element: <AddPortfolio />,
 					},
 					{

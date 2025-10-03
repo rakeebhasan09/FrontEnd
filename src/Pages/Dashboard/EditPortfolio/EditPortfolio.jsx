@@ -1,13 +1,16 @@
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const EditPortfolio = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const { portfolio } = location.state || {};
 	// Add Portfolio Handler
-	const editProtfolioHandler = (event) => {
+	const editProtfolioHandler = async (event) => {
 		event.preventDefault();
+		const id = portfolio.id;
 		const name = event.target.projectName.value;
 		const liveUrl = event.target.liveUrl.value;
 		const technologies = event.target.technologies.value;
@@ -27,12 +30,37 @@ const EditPortfolio = () => {
 			return;
 		}
 
-		Swal.fire({
-			title: "Portfolio Edited.",
-			icon: "success",
-		}).then(() => {
-			event.target.reset(), navigate("/dashboard/portfolio");
-		});
+		const updateInfo = {
+			id,
+			name,
+			liveUrl,
+			technologies,
+			catagories,
+			thumbnailUrl,
+			fullPageUrl,
+		};
+
+		try {
+			const res = await fetch(
+				"http://localhost:5000/api/update-portfolio",
+				{
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(updateInfo),
+				}
+			);
+			if (res.ok) {
+				Swal.fire({
+					title: "Portfolio Edited.",
+					icon: "success",
+				}).then(() => {
+					event.target.reset();
+					navigate("/dashboard/portfolio");
+				});
+			}
+		} catch (err) {
+			console.error(err);
+		}
 	};
 	return (
 		<>
@@ -54,7 +82,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"Project Name"}
+								defaultValue={portfolio.name}
 								name="projectName"
 								placeholder="Write Project Name"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -66,7 +94,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"Live URL"}
+								defaultValue={portfolio.live_link}
 								name="liveUrl"
 								placeholder="Paste Live URL"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -78,7 +106,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"React.js TailwindCSS"}
+								defaultValue={portfolio.technologies}
 								name="technologies"
 								placeholder="Write Uses Technologies"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -91,7 +119,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"landing page"}
+								defaultValue={portfolio.catagoryes}
 								name="catagories"
 								placeholder="Write Project Catagories"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -103,7 +131,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"thumbnailUrl"}
+								defaultValue={portfolio.thumbnail}
 								name="thumbnailUrl"
 								placeholder="Paste Thumbnail URL"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"
@@ -115,7 +143,7 @@ const EditPortfolio = () => {
 							</label>
 							<input
 								type="text"
-								defaultValue={"fullPageUrl"}
+								defaultValue={portfolio.full_picture}
 								name="fullPageUrl"
 								placeholder="Paste Full Page URL"
 								className="outline-none rounded-md w-full bg-[#F8F9FA] py-3 px-5 text-black"

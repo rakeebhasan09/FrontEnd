@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const AddPortfolio = () => {
 	const navigate = useNavigate();
 	// Add Portfolio Handler
-	const addProtfolioHandler = (event) => {
+	const addProtfolioHandler = async (event) => {
 		event.preventDefault();
 		const name = event.target.projectName.value;
 		const liveUrl = event.target.liveUrl.value;
@@ -27,12 +27,32 @@ const AddPortfolio = () => {
 			return;
 		}
 
-		Swal.fire({
-			title: "Portfolio Added.",
-			icon: "success",
-		}).then(() => {
-			event.target.reset(), navigate("/dashboard/portfolio");
-		});
+		const newPortfolioInfo = {
+			name,
+			liveUrl,
+			technologies,
+			catagories,
+			thumbnailUrl,
+			fullPageUrl,
+		};
+
+		try {
+			const res = await fetch("http://localhost:5000/api/add-portfolio", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(newPortfolioInfo),
+			});
+			if (res.ok) {
+				Swal.fire({
+					title: "Portfolio Added.",
+					icon: "success",
+				}).then(() => {
+					event.target.reset(), navigate("/dashboard/portfolio");
+				});
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 	return (
 		<>

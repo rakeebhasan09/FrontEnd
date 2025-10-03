@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ToolkitTable = () => {
-	const navigate = useNavigate();
 	const [toolkits, setToolkits] = useState([]);
 	useEffect(() => {
 		fetch("http://localhost:5000/api/toolits")

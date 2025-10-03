@@ -63,5 +63,15 @@
 		"id": "efc845c6-274f-49d7-8f56-1d11b6bbd143",
 		"label": "MongoDB Icon",
 		"logo": "https://i.ibb.co.com/5hwXjkkJ/mongodb-icon.png"
+	},
+	{
+		"id": "efc845c6-274f-49d7-68f5-1d11b6bbd143",
+		"label": "Git CRM Icon",
+		"logo": "https://i.ibb.co.com/ns7rw7Xj/git-crm-logo.png"
+	},
+	{
+		"id": "efc845c6-274f-49d7-8f56-1d11b6b43bd1",
+		"label": "Github Icon",
+		"logo": "https://i.ibb.co.com/mVv6w44c/Git-Hub-Logo.png"
 	}
 ]
